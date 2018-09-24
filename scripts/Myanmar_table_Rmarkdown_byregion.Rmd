@@ -1,0 +1,192 @@
+---
+title: "Myanmar Township Visualizations: Rakhine"
+author: "SCBI Conservation GIS Lab"
+date: "May 1, 2018"
+output: pdf_document
+---
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+################# Modified version of Myanmar_table.R. #########################
+#This script is used to generated a pdf of deforestation rates over time in townships of Myanmar.
+#Please see Myanmar_table.R for source code and more detailed commentary.
+#contact klingesd@si.edu for info.
+```
+
+
+## Contents
+- Each figure represents the loss of forested area, per township, for the region of Rakhine.
+- Figures are sorted in descending order (greatest to least) by amount of total forest loss
+(expressed as a % of the total forest cover in 2000)
+- X-axis corresponds to years 2001-2016.
+- Y-axis corresponds to amount of deforested area in a given year, expressed as a % of the total
+forest in 2000 (e.g., 0.03 = 3% of forest area in year 2000 lost in given year)
+- Color scale stretched from green (0% loss) to red (>1%); midpoint of color scale set at
+0.55% (mean forest loss for all years in all townships)
+
+
+
+##### Correspondents
+Qiongyu Huang, SCBI Conservation GIS Lab
+
+huangq@si.edu
+
+David Klinges, SCBI Conservation GIS Lab
+
+klingesd@si.edu
+
+*******
+\pagebreak
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Install and call
+setwd('Z:/Interns/David/Myanmar/ArcMap_working_folder/Myanmar_townships')
+
+Sys.setenv(JAVA_HOME='C:/Program Files (x86)/Java/jre1.8.0_162')
+
+#install.packages('dplyr', repos = 'https://cran.r-project.org/web/packages/dplyr/index.html')
+#install.packages('tidyr', repos = 'https://cran.r-project.org/web/packages/tidyr/index.html')
+#install.packages('ggplot2', repos = 'https://cran.r-project.org/web/packages/ggplot2/index.html')
+#install.packages('data.table', repos = 'https://cran.r-project.org/web/packages/data.table/index.html')
+#install.packages('rmarkdown', repos = 'https://cran.r-project.org/web/packages/rmarkdown/index.html')
+#install.packages('tinytex', repos = 'https://cran.r-project.org/web/packages/tinytex/index.html')
+#devtools::install_version("rmarkdown", version = "1.8", repos = "http://cran.us.r-project.org")
+#install.packages('scales', repos = 'https://cran.r-project.org/web/packages/scales/index.html')
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+library(tidyr)
+library(data.table)
+library(rmarkdown)
+library(tinytex)
+library(scales)
+```
+
+```{r setup, include=FALSE, message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = TRUE,
+	warning = FALSE
+)
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+#Objective:
+#Plot the temporal change of deforestation in each township
+#Automate this process, as so many townships
+#Independent: year
+#Dependent: % of total forest area in 2000 lost
+#Title each plot to make township, state, and total forest area in 2000 apparent
+
+
+#Load data: deforestation in Myanmar as determined by Hansen 2016
+#Deforestation is given in Landsat pixels (30m x 30m)
+Myanmar_table = read.csv("towndeforestation_total.csv")
+
+#Change column names
+Myanmar <- setnames(Myanmar_table, old = c(7:22), new = c("2016", "2015", "2014", "2013",
+                                                          "2012", "2011", "2010", "2009",
+                                                          "2008", "2007", "2006", "2005",
+                                                          "2004", "2003", "2002", "2001"))
+
+pix_to_km2 <- function(x) {x * 900 / 1000000} #Convert pixels to km2
+km2_to_acre <- function(x) {x * 247.105} #Convert km2 to acres
+
+#Myanmar <- mutate(Myanmar, treecover2000_km2 = sapply(select(Myanmar, 23), pix_to_km2))
+
+
+#In order to determine an appropriate Y-axis scale for deforestation, sort data by amount of loss
+loss <- gather(Myanmar, "Year", "Loss", 7:22)
+lossper <- mutate(loss, Loss = Loss / treecover2000)
+lossper <- arrange(lossper, Loss)
+
+#Calculate average amount of forest loss in a given year, for all townships
+lossmean <- mean(lossper$Loss)
+
+#Add column for percent loss
+Myanmar <- mutate(Myanmar, percentloss = totalloss/treecover2000)
+
+#Sort table by Region and then district
+Myanmar.sorted <- arrange(Myanmar, Region, desc(percentloss))
+
+#Separate table by region
+
+region_list <- list("Ayeyarwady", "Bago", "Chin", "Kachin", "Kayah", "Magway", "Mandalay", "Mon", "Naypyitaw", "Sagaing", "Shan", "Tanintharyi", "Yangon", "Rakhine")
+
+
+Ayeyarwady <- filter(Myanmar.sorted, Region == "Ayeyarwady")
+Bago <- filter(Myanmar.sorted, Region == "Bago")
+Chin <- filter(Myanmar.sorted, Region == "Chin")
+Kachin <- filter(Myanmar.sorted, Region == "Kachin")
+Kayah <- filter(Myanmar.sorted, Region == "Kayah")
+Magway <- filter(Myanmar.sorted, Region == "Magway")
+Mandalay <- filter(Myanmar.sorted, Region == "Mandalay")
+Mon <- filter(Myanmar.sorted, Region == "Mon")
+Naypyitaw <- filter(Myanmar.sorted, Region == "Naypyitaw")
+Sagaing <- filter(Myanmar.sorted, Region == "Sagaing")
+Shan <- filter(Myanmar.sorted, Region == "Shan")
+Tanintharyi <- filter(Myanmar.sorted, Region == "Tanintharyi")
+Yangon <- filter(Myanmar.sorted, Region == "Yangon")
+Rakhine <- filter(Myanmar.sorted, Region == "Rakhine")
+```
+
+```{r, echo = FALSE, warning=FALSE}
+plotfun <- function(i) {
+
+    #Subset to a particular row
+    township <- slice(Rakhine, i)
+    
+    #Create variables for strings that will be referenced later
+    town <- as.character(township$Township)
+    district <- as.character(township$District)
+    region <- as.character(township$Region)
+    forest2000 <- formatC(
+                  (sapply(township$treecover2000, km2_to_acre)),
+                  format = "e", digits = 2)
+    totalloss <- formatC(
+                  (sapply(township$totalloss, km2_to_acre)),
+                  format = "e", digits = 2)
+    
+    #Create new data frame of just two columns, the year, and the amount of
+    #forest loss (expressed as a % of total forest in 2000)
+    township <- gather(township, "Year", "Loss", 7:22)
+    township <- mutate(township, Loss = Loss / treecover2000)
+    township <- select(township, Year, Loss)
+    
+    #Turn into a data frame (is this necessary? who knows)
+    township <- data.frame(township)
+    
+    township$Year <- as.integer(township$Year)
+    
+    #Create plot
+    plot <- ggplot(township, aes(x = Year, y = Loss, fill = Loss)) +
+      geom_col() +
+      scale_fill_gradient2(low = '#003300', high = '#990000', mid = '#eae43f',
+                           midpoint = lossmean, limits = c(0, .011), oob = squish) +
+      ylab("Deforested Area as % of Forest Cover in 2000") +
+      coord_cartesian(xlim = NULL, ylim = c(0.00, 0.03), expand = TRUE) +
+      theme(axis.text.x = element_text(size = 10)) +
+      theme(axis.text.y = element_text(size = 14)) +
+      theme(axis.title.x = element_text(size = 16, face = 'bold')) +
+      theme(axis.title.y = element_text(size = 12, face = 'bold')) + 
+      scale_x_continuous(breaks=seq(2001, 2016, 5 )) +
+      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+            panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+      theme(plot.title = element_text(size = 16)) +
+      labs(title = paste('Forest Loss,', town, 'in', district, 'of', region),
+           subtitle = paste('Total Deforestation =', totalloss, 'acres;', 'Total Forest in 2000 =', forest2000, 'acres'))
+
+    if ((summarise(township, max(Loss))) > 0.03) {
+      plot <- plot + coord_cartesian(xlim = NULL, ylim = 
+                                       c(0.00, as.numeric(summarise(township, max(Loss)))), expand = TRUE)}
+
+    #Save plot to list
+    return(plot)
+}
+
+# Loop tasks over all 286 township rows
+for (i in (1:nrow(Rakhine))) {
+  plot(plotfun(i))
+}
+```
+
