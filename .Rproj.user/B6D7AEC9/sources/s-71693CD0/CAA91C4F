@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541735583805.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CAA91C4F",
+    "lastKnownWriteTime" : 1541735719,
+    "last_content_update" : 1541735719289,
+    "path" : "~/Documents/GitHub/Myanmar-forest-loss/scripts/forest_loss/Loss Year Script.R",
+    "project_path" : "scripts/forest_loss/Loss Year Script.R",
+    "properties" : {
+        "cursorPosition" : "34,2",
+        "scrollLine" : "12"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
