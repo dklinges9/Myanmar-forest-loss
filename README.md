@@ -1,8 +1,6 @@
-# Myanmar-forest-loss
-## **Temporal and spatial heterogeneity of land cover change in the complex forest landscape of Myanmar**
+# **Temporal and spatial heterogeneity of land cover change in the complex forest landscape of Myanmar**
 
-
-Quantification of forest cover and fragmentation between townships in Myanmar, 2001-2017.
+__Quantification of forest cover and fragmentation between townships in Myanmar, 2001-2017.__
 
 Most folders are currently organized into content related to two categories:
 + forest loss
