@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "CAA91C4F",
-    "lastKnownWriteTime" : 1541735719,
-    "last_content_update" : 1541735719289,
+    "lastKnownWriteTime" : 1541736537,
+    "last_content_update" : 1541736537,
     "path" : "~/Documents/GitHub/Myanmar-forest-loss/scripts/forest_loss/Loss Year Script.R",
     "project_path" : "scripts/forest_loss/Loss Year Script.R",
     "properties" : {
-        "cursorPosition" : "34,2",
-        "scrollLine" : "12"
+        "cursorPosition" : "34,0",
+        "scrollLine" : "33"
     },
     "relative_order" : 1,
     "source_on_save" : false,
