@@ -1,13 +1,15 @@
-#This is a script that calculates forest loss statistics for all 15 states in Myanmar. It uses SDMTools::PatchStat to output the average patch
-#size (in square meters) and the total number of patches for forest loss in Hansen v1.5. Patch statistics are further broken out by year of 
-#loss in Hansen (2000-2017) by using the "lossyear" band instead of "loss." See Sumalika Biswas for details.
+# This is a script that calculates forest loss statistics for all 15 states in Myanmar.
+# It uses SDMTools::PatchStat to output the average patch size (in square meters) and 
+#   the total number of patches for forest loss in Hansen v1.5. Patch statistics are 
+#   further broken out by year of loss in Hansen (2000-2017) by using the "lossyear" 
+#   band instead of "loss." See Sumalika Biswas for details.
 #
 #Audrey Lothspeich
 #2018
 
 ##### Load Data #####
 
-setwd("W:/Personal/Interns/2018/AudreyLothspeich/Myanmar Forest Loss")
+# setwd("W:/Personal/Interns/2018/AudreyLothspeich/Myanmar Forest Loss")
 
 library(dplyr)
 library(sp)
@@ -19,17 +21,18 @@ library(SDMTools)
 
 options(stringsAsFactors = F)
 
-projected<-'+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
-states<-readOGR(dsn = "./Myanmar Borders", layer = "MMR_adm1") #Myanmar administrative areas taken from http://www.diva-gis.org/gdata
+projected <-'+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
+states <-readOGR(dsn = "./Myanmar Borders", layer = "MMR_adm1") 
+# Myanmar administrative areas taken from http://www.diva-gis.org/gdata
 
-#I downloaded subsets of Hansen that cover Myanmar directly from 
-#https://earthenginepartners.appspot.com/science-2013-global-forest/download_v1.5.html
-#and initially had to merge them into a single forest loss layer for Myanmar
+# I downloaded subsets of Hansen that cover Myanmar directly from 
+# https://earthenginepartners.appspot.com/science-2013-global-forest/download_v1.5.html
+# and initially had to merge them into a single forest loss layer for Myanmar
 
-#Hansen1<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_30N_090E.tif")
-#Hansen2<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_20N_090E.tif")
-#Hansen3<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_10N_090E.tif")
-#Hansen4<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_30N_100E.tif")
+# Hansen1<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_30N_090E.tif")
+# Hansen2<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_20N_090E.tif")
+# Hansen3<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_10N_090E.tif")
+# Hansen4<-raster("./Myanmar_Hansen/Hansen_GFC-2017-v1.5_lossyear_30N_100E.tif")
 
 #Hansen<-raster::merge(Hansen1,Hansen2,Hansen3,Hansen4)
 
