@@ -1,4 +1,7 @@
-
+---
+title: test sample
+bibliography: biblio.bib
+---
 
 test
 # test
