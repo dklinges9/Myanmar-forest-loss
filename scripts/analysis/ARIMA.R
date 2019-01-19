@@ -3,7 +3,7 @@
 #   analyses on forest patch area loss
 
 ## README ############
-# - Code is sectioned according to what data is used
+# - Code is sectioned according to what data is used and how it is prepped
 # - Each section contains data curation, transformation, visualization, etc.
 # - ARIMA analyses are held in different sections below
 
@@ -14,8 +14,6 @@ library(stats)
 library(zoo)
 library(tidyverse)
 library(drLumi)
-
-data("AirPassengers")
 
 allyears_pertown <- read.csv("./data/outputs/Myanmar_TownshipForestLossFragmentation.csv")
 
@@ -78,7 +76,6 @@ plot(decomposed)
 
 lm(Year ~ sum, country_loss_sum)
 
-
 ## Separated pre and post policy intervention ########
 
 ## * Pre and post intervention, country-wide loss #########
@@ -117,7 +114,7 @@ plot(decompose(countrywide_pre_PLA_HW))
 
 
 
-# * Pre and post intervention, per-town loss ##########
+# * Pre and post intervention, per-town loss (191901 last left off) ##########
 pertown_pre <- allyears_pertown %>%
   filter(year < 2011)
 
@@ -130,10 +127,12 @@ pertown_pre_avgs <- pertown_pre %>%
   group_by(year) %>%
   summarize_all(mean)
 
+# Save characters by creating objects
 x <- pertown_pre_avgs$year
 y <- pertown_pre_avgs$patch_loss_area
 
 # Create a self-starting exponential curve, which appears to fit well
+# I DON'T KNOW HOW TO STRUCTURE THIS FUNCTION YET
 ssExp <- selfStart(~ A*x^2,
   function(mCall, data, LHS) {
     xy <- sortedXyData(mCall[["x"]], LHS, data)
@@ -152,8 +151,7 @@ ssExp <- selfStart(~ A*x^2,
 
 SSexp(pertown_pre_avgs$year, 208, 4)
 
-
-#for simple models nls find good starting values for the parameters even if it throw a warning
+#for simple models nls find good starting values for the parameters even if it throws a warning
 model <- nls(y ~ b1*x^2+b2, start = list(b1 = 1, b2 = 3))
 #get some estimation of goodness of fit
 cor(y,predict(model))
@@ -163,10 +161,12 @@ lines(x,predict(model),lty=2,col="red",lwd=3)
 print(sum(resid(model)^2))
 print(confint(model))
 
-# Plot the chart with new data by fitting it to a prediction from 100 data points.
+#Plot the chart with new data by fitting it to a prediction from 100 data points.
 new.data <- data.frame(x = seq(min(x),max(x),len = 100))
 lines(new.data$x,predict(model,newdata = new.data))
 
+
+## * Transform per-town pre and post data ##############
 # Initial distributions of per town loss
 hist(pertown_pre$patch_loss_area, breaks = 50)
 hist(pertown_post$patch_loss_area, breaks = 50)
@@ -199,7 +199,7 @@ hist(pertown_pre$patch_area_square_root, breaks = 50)
 pertown_post$patch_area_square_root <- (pertown_post$avg_patch_area)^(0.5)
 hist(pertown_post$patch_area_square_root, breaks = 50)
 
-
+## * Messing around with per-town time series #############
 timeSeries_pre <- as.ts(pertown_pre$patch_loss_area, start = 2001, end = 2010,
                     frequency = 1)
 
