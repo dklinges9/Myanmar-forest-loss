@@ -21,6 +21,10 @@
 
 [Plotting residuals](https://rdrr.io/cran/FSA/man/residPlot.html)
 
+[Another model-fitting example[(https://www.theanalysisfactor.com/r-tutorial-4/) (_In this case, quadratic model_)
+
+[Fitting an exponential model](https://stats.stackexchange.com/questions/11947/fitting-an-exponential-model-to-data)
+(_this is what led to me finally 
 
 ### ARIMA, not R-coding related
 [Notes on non-seasonal ARIMA models](http://people.duke.edu/~rnau/Notes_on_nonseasonal_ARIMA_models--Robert_Nau.pdf)
