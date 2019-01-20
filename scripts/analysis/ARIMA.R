@@ -51,6 +51,160 @@ hist(allyears_pertown$recip_root, breaks = 50)
 #   and log are closest to normal
 
 
+## * Per town loss sum for all years ################
+
+sumyears_pertown <- allyears_pertown %>%
+  select(-year) %>%
+  group_by(township) %>%
+  summarize_all(mean)
+
+# Only select towns in top 10 percentile of forest loss
+sumyears_pertown_10p <- sumyears_pertown %>%
+  filter(patch_loss_area >= 40771683.7) # loss of 29th highest township
+  
+## * Top 10th percentile loss across all years #############
+
+allyears_pertown_10p <- allyears_pertown %>%
+  filter(township %in% sumyears_pertown_10p$township)
+
+
+# Summarized across the country
+country_loss_avg_10p <- allyears_pertown_10p %>%
+  group_by(year) %>%
+  summarize(patch_loss_area = mean(patch_loss_area))
+
+
+# Save characters by creating objects
+x <- country_loss_avg_10p$year
+y <- country_loss_avg_10p$patch_loss_area
+
+#we will make y the response variable and x the predictor
+#the response variable is usually on the y-axis
+plot(x,y,pch=19)
+
+# fit non-linear model
+mod <- nls(y ~ exp(a + b * (x-2000)), start = list(a = 0, b = 1))
+
+# add fitted curve
+lines(x, predict(mod, list(x = x)))
+
+# this works right here 
+
+
+x2 <- x^2
+
+
+#fit first degree polynomial equation:
+fit  <- lm(y~x)
+#second degree
+fit2 <- lm(y ~ x + x2)
+quadratic.model <-lm(Counts ~ Time + Time2)
+
+mod <- nls(y ~ exp(a + b * (x-2000)), start = list(a = 0, b = 1))
+
+#generate range of 50 numbers starting from 30 and ending at 160
+xx <- seq(0,300000000, length=493)
+lines(xx, predict(fit, data.frame(x=xx)), col="red")
+lines(xx, predict(fit2, data.frame(x=xx)), col="green")
+
+
+
+
+
+# fit non-linear model
+mod <- nls(patch_loss_area ~ exp(a + b * (year-2000)), data = country_loss_avg_10p, start = list(a = 0, b = 0))
+
+# add fitted curve
+lines(temp$x, predict(mod, list(x = temp$x)))
+
+
+predictedcounts <- predict(quadratic.model,list(Time=timevalues, Time2=timevalues^2))
+
+
+
+# Create a self-starting exponential curve, which appears to fit well
+# I DON'T KNOW HOW TO STRUCTURE THIS FUNCTION YET
+ssExp <- selfStart(~ A*x^2 + B,
+                   function(mCall, data, LHS) {
+                     xy <- sortedXyData(mCall[["x"]], LHS, data)
+                     if(nrow(xy) < 3) {
+                       stop("Too few distinct x values to fit a power function")
+                     }
+                     z <- xy[["y"]]
+                     xy[["logx"]] <- log(xy[["x"]])     
+                     xy[["logy"]] <- log(xy[["y"]])  
+                     aux <- coef(lm(logy ~ logx, xy))
+                     pars <- c(exp(aux[[1]]), aux[[2]])
+                     setNames(pars,
+                              mCall[c("A", "B")])
+                   }, c("A", "B")
+)
+
+SSexp(allyears_pertown_10p$year, 208, 4)
+
+
+
+SSbsr <- selfStart(
+  model = function(x, breakPointX, breakPointY, slope1, slope2)
+  {
+    ifelse(x > breakPointX,
+           (x - breakPointX) * slope2 + breakPointY,
+           (x - breakPointX) * slope1 + breakPointY)
+  },
+  initial = function(mCall, data, LHS)
+  {
+    xy <- sortedXyData(mCall[["x"]], LHS, data)
+    n <- nrow(xy)
+    if (n < 7) {
+      stop("need at least 7 points to compute initial estimates")
+    }
+    first <- seq(from=1, length.out=4)
+    last <- seq(length.out=4, to=n)
+    fit1 <- coefficients(lm.fit(cbind(1,xy[first,"x"]), xy[first,"y"]))
+    fit2 <- coefficients(lm.fit(cbind(1,xy[last,"x"]), xy[last,"y"]))
+    slope1 <- fit1[[2]]
+    slope2 <- fit2[[2]]
+    bpXY <- solve(cbind(-c(slope1,slope2), 1),
+                  as.matrix(c(fit1[[1]], fit2[[1]])))
+    breakPointX <- bpXY[1]
+    breakPointY <- bpXY[2]
+    # the names of the output list must match the
+    # names the user gave in the call
+    structure(list(breakPointX, breakPointY, slope1, slope2),
+              names=as.character(mCall[c("breakPointX",
+                                         "breakPointY", "slope1", "slope2")]))
+  },
+  parameters = c("breakPointX", "breakPointY", "slope1", "slope2"))
+
+bsrData <- data.frame(
+  x = c(8.4, 2.8, 6.9, 0, 4.1, 0.3, 7.2, 0.6, 8.1, 8.8, 5.9, 5.3),
+  y = c(0.62, 0.39, 0.52, 0.33, 0.45, 0.36, 0.56, 0.33, 0.63, 0.65, 0.49, 0.48))
+
+model <- nls(y ~ SSbsr(x, bpX, bpY, s1, s2))
+
+cor(y,predict(model))
+plot(y ~ x, bsrData)
+lines(bsrData$x,predict(model),lty=2,col="red",lwd=3)
+
+
+
+
+#for simple models nls find good starting values for the parameters even if it throws a warning
+model <- nls(y ~ SSexp(allyears_pertown_10p$year, 208, 4))
+#get some estimation of goodness of fit
+cor(y,predict(model))
+plot(x,y)
+lines(x,predict(model),lty=2,col="red",lwd=3)
+
+print(sum(resid(model)^2))
+print(confint(model))
+
+#Plot the chart with new data by fitting it to a prediction from 100 data points.
+new.data <- data.frame(x = seq(min(x),max(x),len = 100))
+lines(new.data$x,predict(model,newdata = new.data))
+
+
+
 ## * Total loss for country across all years ##########
 # Average loss per township
 country_loss_avg <- country_loss %>%
