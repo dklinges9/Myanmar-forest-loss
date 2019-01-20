@@ -10,17 +10,19 @@
 
 [Removing seasonality](https://stats.stackexchange.com/questions/105273/removing-seasonality-from-data)
 
-### Fitting non-linear regressions in R
+### Model Fitting in R
 
-[DataSciencePlus: using nls()](https://datascienceplus.com/first-steps-with-non-linear-regression-in-r/)
+[DataSciencePlus: using nls()](https://datascienceplus.com/first-steps-with-non-linear-regression-in-r/)  
 [Fitting non-linear models](https://tonyladson.wordpress.com/2016/06/20/fitting-non-linear-models/) (_this source doesn’t provide code but some somewhat-helpful text_)
 
 [StackExchange: non-linear fitting with nls()](https://stats.stackexchange.com/questions/30975/how-to-add-non-linear-trend-line-to-a-scatter-plot-in-r)
 
+[Model Fitting in R](http://garrettgman.github.io/model-fitting/)  
+
 [Plotting residuals](https://rdrr.io/cran/FSA/man/residPlot.html)
 
 
-### ARIMA, not R-coding relate
+### ARIMA, not R-coding related
 [Notes on non-seasonal ARIMA models](http://people.duke.edu/~rnau/Notes_on_nonseasonal_ARIMA_models--Robert_Nau.pdf)
 
 ### ARIMA in R
