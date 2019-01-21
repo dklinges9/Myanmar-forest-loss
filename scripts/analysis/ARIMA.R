@@ -78,132 +78,17 @@ country_loss_avg_10p <- allyears_pertown_10p %>%
 x <- country_loss_avg_10p$year
 y <- country_loss_avg_10p$patch_loss_area
 
-#we will make y the response variable and x the predictor
-#the response variable is usually on the y-axis
-plot(x,y,pch=19)
+# Plot to check out the time series
+plot(x, y, pch=19)
 
-# fit non-linear model
-mod <- nls(y ~ exp(a + b * (x-2000)), start = list(a = 0, b = 1))
+# Git non-linear model
+exp_model <- nls(y ~ exp(a + b * (x-2000)), start = list(a = 0, b = 1))
 
-# add fitted curve
-lines(x, predict(mod, list(x = x)))
+# Check correlation
+cor(y,predict(exp_model))
 
-# this works right here 
-
-
-x2 <- x^2
-
-
-#fit first degree polynomial equation:
-fit  <- lm(y~x)
-#second degree
-fit2 <- lm(y ~ x + x2)
-quadratic.model <-lm(Counts ~ Time + Time2)
-
-mod <- nls(y ~ exp(a + b * (x-2000)), start = list(a = 0, b = 1))
-
-#generate range of 50 numbers starting from 30 and ending at 160
-xx <- seq(0,300000000, length=493)
-lines(xx, predict(fit, data.frame(x=xx)), col="red")
-lines(xx, predict(fit2, data.frame(x=xx)), col="green")
-
-
-
-
-
-# fit non-linear model
-mod <- nls(patch_loss_area ~ exp(a + b * (year-2000)), data = country_loss_avg_10p, start = list(a = 0, b = 0))
-
-# add fitted curve
-lines(temp$x, predict(mod, list(x = temp$x)))
-
-
-predictedcounts <- predict(quadratic.model,list(Time=timevalues, Time2=timevalues^2))
-
-
-
-# Create a self-starting exponential curve, which appears to fit well
-# I DON'T KNOW HOW TO STRUCTURE THIS FUNCTION YET
-ssExp <- selfStart(~ A*x^2 + B,
-                   function(mCall, data, LHS) {
-                     xy <- sortedXyData(mCall[["x"]], LHS, data)
-                     if(nrow(xy) < 3) {
-                       stop("Too few distinct x values to fit a power function")
-                     }
-                     z <- xy[["y"]]
-                     xy[["logx"]] <- log(xy[["x"]])     
-                     xy[["logy"]] <- log(xy[["y"]])  
-                     aux <- coef(lm(logy ~ logx, xy))
-                     pars <- c(exp(aux[[1]]), aux[[2]])
-                     setNames(pars,
-                              mCall[c("A", "B")])
-                   }, c("A", "B")
-)
-
-SSexp(allyears_pertown_10p$year, 208, 4)
-
-
-
-SSbsr <- selfStart(
-  model = function(x, breakPointX, breakPointY, slope1, slope2)
-  {
-    ifelse(x > breakPointX,
-           (x - breakPointX) * slope2 + breakPointY,
-           (x - breakPointX) * slope1 + breakPointY)
-  },
-  initial = function(mCall, data, LHS)
-  {
-    xy <- sortedXyData(mCall[["x"]], LHS, data)
-    n <- nrow(xy)
-    if (n < 7) {
-      stop("need at least 7 points to compute initial estimates")
-    }
-    first <- seq(from=1, length.out=4)
-    last <- seq(length.out=4, to=n)
-    fit1 <- coefficients(lm.fit(cbind(1,xy[first,"x"]), xy[first,"y"]))
-    fit2 <- coefficients(lm.fit(cbind(1,xy[last,"x"]), xy[last,"y"]))
-    slope1 <- fit1[[2]]
-    slope2 <- fit2[[2]]
-    bpXY <- solve(cbind(-c(slope1,slope2), 1),
-                  as.matrix(c(fit1[[1]], fit2[[1]])))
-    breakPointX <- bpXY[1]
-    breakPointY <- bpXY[2]
-    # the names of the output list must match the
-    # names the user gave in the call
-    structure(list(breakPointX, breakPointY, slope1, slope2),
-              names=as.character(mCall[c("breakPointX",
-                                         "breakPointY", "slope1", "slope2")]))
-  },
-  parameters = c("breakPointX", "breakPointY", "slope1", "slope2"))
-
-bsrData <- data.frame(
-  x = c(8.4, 2.8, 6.9, 0, 4.1, 0.3, 7.2, 0.6, 8.1, 8.8, 5.9, 5.3),
-  y = c(0.62, 0.39, 0.52, 0.33, 0.45, 0.36, 0.56, 0.33, 0.63, 0.65, 0.49, 0.48))
-
-model <- nls(y ~ SSbsr(x, bpX, bpY, s1, s2))
-
-cor(y,predict(model))
-plot(y ~ x, bsrData)
-lines(bsrData$x,predict(model),lty=2,col="red",lwd=3)
-
-
-
-
-#for simple models nls find good starting values for the parameters even if it throws a warning
-model <- nls(y ~ SSexp(allyears_pertown_10p$year, 208, 4))
-#get some estimation of goodness of fit
-cor(y,predict(model))
-plot(x,y)
-lines(x,predict(model),lty=2,col="red",lwd=3)
-
-print(sum(resid(model)^2))
-print(confint(model))
-
-#Plot the chart with new data by fitting it to a prediction from 100 data points.
-new.data <- data.frame(x = seq(min(x),max(x),len = 100))
-lines(new.data$x,predict(model,newdata = new.data))
-
-
+# 0.9557971....pretty good. Let's add the fitted curve to the plot
+lines(x, predict(exp_model, list(x = x)))
 
 ## * Total loss for country across all years ##########
 # Average loss per township
@@ -268,59 +153,8 @@ plot(decompose(countrywide_pre_PLA_HW))
 
 
 
-# * Pre and post intervention, per-town loss (191901 last left off) ##########
-pertown_pre <- allyears_pertown %>%
-  filter(year < 2011)
-
-pertown_post <- allyears_pertown %>%
-  filter(year >= 2011)
-
-# Plot trends
-pertown_pre_avgs <- pertown_pre %>%
-  select(-township) %>%
-  group_by(year) %>%
-  summarize_all(mean)
-
-# Save characters by creating objects
-x <- pertown_pre_avgs$year
-y <- pertown_pre_avgs$patch_loss_area
-
-# Create a self-starting exponential curve, which appears to fit well
-# I DON'T KNOW HOW TO STRUCTURE THIS FUNCTION YET
-ssExp <- selfStart(~ A*x^2,
-  function(mCall, data, LHS) {
-    xy <- sortedXyData(mCall[["x"]], LHS, data)
-    if(nrow(xy) < 3) {
-      stop("Too few distinct x values to fit a power function")
-    }
-    z <- xy[["y"]]
-    xy[["logx"]] <- log(xy[["x"]])     
-    xy[["logy"]] <- log(xy[["y"]])  
-    aux <- coef(lm(logy ~ logx, xy))
-    pars <- c(exp(aux[[1]]), aux[[2]])
-    setNames(pars,
-             mCall[c("A", "B")])
-  }, c("A", "B")
-)
-
-SSexp(pertown_pre_avgs$year, 208, 4)
-
-#for simple models nls find good starting values for the parameters even if it throws a warning
-model <- nls(y ~ b1*x^2+b2, start = list(b1 = 1, b2 = 3))
-#get some estimation of goodness of fit
-cor(y,predict(model))
-plot(x,y)
-lines(x,predict(model),lty=2,col="red",lwd=3)
-
-print(sum(resid(model)^2))
-print(confint(model))
-
-#Plot the chart with new data by fitting it to a prediction from 100 data points.
-new.data <- data.frame(x = seq(min(x),max(x),len = 100))
-lines(new.data$x,predict(model,newdata = new.data))
-
-
-## * Transform per-town pre and post data ##############
+## * Pre and post intervention, per-town loss ##########
+## ++ Transform per-town pre and post data ##############
 # Initial distributions of per town loss
 hist(pertown_pre$patch_loss_area, breaks = 50)
 hist(pertown_post$patch_loss_area, breaks = 50)
@@ -352,6 +186,96 @@ pertown_pre$patch_area_square_root <- (pertown_pre$avg_patch_area)^(0.5)
 hist(pertown_pre$patch_area_square_root, breaks = 50)
 pertown_post$patch_area_square_root <- (pertown_post$avg_patch_area)^(0.5)
 hist(pertown_post$patch_area_square_root, breaks = 50)
+
+## ++ Pre intervention, per-town loss ###########
+pertown_pre <- allyears_pertown %>%
+  filter(year < 2011)
+
+# Plot trends
+pertown_pre_avgs <- pertown_pre %>%
+  select(-township) %>%
+  group_by(year) %>%
+  summarize_all(mean)
+
+# Save characters by creating objects, and include a log transformation
+x <- pertown_pre_avgs$year - 2000
+y <- pertown_pre_avgs$patch_loss_area
+logy <-  log(pertown_pre_avgs$patch_loss_area)
+sqrooty <- pertown_pre_avgs$patch_loss_area^(0.5)
+
+# Plot to check out the time series
+plot(x, y, pch=19)
+fit  <- lm(y~x)
+cor(y,predict(fit))
+lines(x, predict(fit, list(x = x)))
+
+# Plot for log transformation
+plot(x, logy, pch=19)
+fit2  <- lm(logy~x)
+cor(logy,predict(fit2))
+lines(x, predict(fit2, list(x = x)))
+
+# Plot for square root transformation
+plot(x, sqrooty, pch=19)
+fit2  <- lm(sqrooty~x)
+cor(sqrooty,predict(fit2))
+lines(x, predict(fit2, list(x = x)))
+
+# # Get non-linear model
+# # Use a self-starting exponential curve, which appears to fit well
+# exp_model <- nls(y ~ SSexp(x, .1, 2000000),  control = list(maxiter = 500),
+#                  trace = TRUE, alg = 'plinear')
+# 
+# exp_model <- nls(y ~ exp(b * (x-2000)), start = list(b = 1))
+# 
+# # Check correlation
+# cor(y,predict(exp_model))
+# lines(x, predict(exp_model, list(x = x)))
+
+## *** Pre intervention, top 10th percentile of loss ##########
+
+pertown_pre_10p <- pertown_pre %>%
+  filter(patch_loss_area >= 40771683.7) # loss of 29th highest township
+
+
+# ggplot it
+plot <- ggplot(pertown_pre, aes(year-2000, patch_loss_area)) +
+  geom_jitter()
+
+plot
+## ++ Post intervention, per-town loss ############
+pertown_post <- allyears_pertown %>%
+  filter(year >= 2011)
+
+# Plot trends
+pertown_post_avgs <- pertown_post %>%
+  select(-township) %>%
+  group_by(year) %>%
+  summarize_all(mean)
+
+# Save characters by creating objects, and include a log transformation
+x <- pertown_post_avgs$year - 2000
+y <- pertown_post_avgs$patch_loss_area
+logy <-  log(pertown_post_avgs$patch_loss_area)
+sqrooty <- pertown_post_avgs$patch_loss_area^(0.5)
+
+# Plot to check out the time series
+plot(x, y, pch=19)
+fit  <- lm(y~x)
+cor(y,predict(fit))
+lines(x, predict(fit, list(x = x)))
+
+# Plot for log transformation
+plot(x, logy, pch=19)
+fit2  <- lm(logy~x)
+cor(logy,predict(fit2))
+lines(x, predict(fit2, list(x = x)))
+
+# Plot for square root transformation
+plot(x, sqrooty, pch=19)
+fit2  <- lm(sqrooty~x)
+cor(sqrooty,predict(fit2))
+lines(x, predict(fit2, list(x = x)))
 
 ## * Messing around with per-town time series #############
 timeSeries_pre <- as.ts(pertown_pre$patch_loss_area, start = 2001, end = 2010,
