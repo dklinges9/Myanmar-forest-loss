@@ -1,0 +1,287 @@
+NAME_1,NAME_2,NAME_3,loss_2014,treecover2000,percentloss
+Tanintharyi,Kawthoung,Kawthaung,44784,3140789,0.014258838
+Ayeyarwady,Bassein,Ngaputaw,13585,2258207,0.006015835
+Ayeyarwady,Myoungmya,Labutta,369,78864,0.004678941
+Ayeyarwady,Myoungmya,Myaungmya,1692,225412,0.007506255
+Ayeyarwady,Myoungmya,Wakema,27,17986,0.001501168
+Rakhine,Maungtaw,Maungdaw,11104,1296413,0.008565172
+Rakhine,Buthidaung,Buthidaung,18366,2160957,0.008499012
+Rakhine,Buthidaung,Ponnagyun & Rathedaung,4335,1031589,0.004202255
+Rakhine,Buthidaung,Sittwe (Akyab),1,2179,0.000458926
+Rakhine,Sittwe,Pauktaw,618,199933,0.003091035
+Rakhine,Sittwe,Myebon,7354,1624717,0.004526327
+Rakhine,Kyaunkpyu,Kyaukpyu,2908,587306,0.004951422
+Rakhine,Kyaunkpyu,An,40514,8382837,0.00483297
+Rakhine,Sittwe,Minbya,13073,3658938,0.003572895
+Rakhine,Sittwe,Mrauk-Oo,3775,603619,0.006253945
+Chin,Mindat,Paletwa,124635,12225679,0.010194526
+Chin,Mindat,Kanpetlet,26522,2850034,0.009305854
+Rakhine,Sittwe,Kyauktaw,5240,1475443,0.003551476
+Chin,Mindat,Matupi,50801,6387534,0.007953147
+Chin,Palam,Thlangtlang,77262,4675850,0.016523627
+Chin,Palam,Haka,23491,4694623,0.00500381
+Chin,Mindat,Mindat,65587,4717849,0.013901886
+Magway,Pakokku,Saw,9481,1787752,0.005303308
+Magway,Pakokku,Seikpyu,108,225644,0.00047863
+Magway,Pakokku,Pauk,350,569137,0.000614966
+Magway,Pakokku,Htilin,3788,930198,0.004072251
+Magway,Pakokku,Gangaw,16924,1661654,0.010185033
+Sagaing,Kalemyo,Kale,12603,2412434,0.005224184
+Sagaing,Kalemyo,Mingin,1586,3471362,0.000456881
+Sagaing,Monywa,Kani,2272,2650588,0.000857168
+Sagaing,Monywa,Pale,2519,673174,0.003741975
+Magway,Pakokku,Myaing,2,4848,0.000412541
+Sagaing,Monywa,Yinmabin,167,24038,0.006947333
+Sagaing,Monywa,Budalin,15,4327,0.003466605
+Sagaing,Monywa,Monywa,8,709,0.011283498
+Sagaing,Monywa,Salingyi,518,1731,0.299248989
+Magway,Pakokku,Yesagyo,0,2253,0
+Magway,Pakokku,Pakokku,1,975,0.001025641
+Mandalay,Myingyan,Nyaungu,11,308,0.035714286
+Mandalay,Myingyan,Kyaukpadaung,0,76372,0
+Magway,Magwe Minbu,Chauk,0,338,0
+Magway,Minbu,Salin,2957,464085,0.006371678
+Magway,Magwe Minbu,Yenangyaung,1,111,0.009009009
+Magway,Magwe Minbu,Magwe,1,150,0.006666667
+Magway,Minbu,Minbu (Sagu),37,93038,0.000397687
+Magway,Minbu,Pwinbyu,328,209815,0.001563282
+Magway,Minbu,Sidoktaya,14054,2863453,0.00490806
+Magway,Minbu,Ngape,6758,880920,0.007671525
+Magway,Thayetmyo,Minhla,4793,720876,0.006648855
+Magway,Thayetmyo,Mindon,11391,2155693,0.005284148
+Magway,Thayetmyo,Sinbaungwe (Tantabin),1255,191828,0.006542319
+Magway,Thayetmyo,Thayet,1845,131013,0.014082572
+Magway,Thayetmyo,Kama,4666,608776,0.00766456
+Rakhine,Thandwe,Taungup,19817,5478524,0.003617215
+Rakhine,Thandwe,Arakan (Sandoway),8395,4649772,0.001805465
+Bago,Pyay,Padaung,3251,1760537,0.001846596
+Bago,Pyay,Shwedaung,415,50887,0.008155325
+Ayeyarwady,Hinthada,Kyangin,835,470713,0.001773905
+Ayeyarwady,Hinthada,Myanaung,1067,694854,0.001535574
+Ayeyarwady,Hinthada,Ingapu,1935,875065,0.002211264
+Rakhine,Thandwe,Gwa,10277,3113144,0.003301164
+Rakhine,Kyaunkpyu,Man Aung,645,252183,0.002557666
+Rakhine,Kyaunkpyu,Ramree,2125,917803,0.002315312
+Ayeyarwady,Bassein,Bassein West,21690,1121269,0.019344154
+Ayeyarwady,Bassein,Thabaung,7410,1591547,0.004655847
+Ayeyarwady,Hinthada,Lemyethna,4646,585055,0.007941134
+Ayeyarwady,Bassein,Yegyi,822,453532,0.001812441
+Ayeyarwady,Bassein,Kyonpyaw,200,87870,0.00227609
+Ayeyarwady,Bassein,Kyaunggon,8,20394,0.000392272
+Ayeyarwady,Myoungmya,Einme,4,32902,0.000121573
+Ayeyarwady,Myoungmya,Moulmeingyun,12,10347,0.001159756
+Ayeyarwady,Maubin,Pantanaw,395,136447,0.002894897
+Ayeyarwady,Pharpon,Kyaiklat,6,24235,0.000247576
+Ayeyarwady,Maubin,Ma-Ubin,57,20191,0.00282304
+Ayeyarwady,Maubin,Irrawaddy,3,25431,0.000117966
+Ayeyarwady,Maubin,Yandoon,128,58093,0.002203364
+Ayeyarwady,Maubin,Danubyu,79,46895,0.001684615
+Yangon,Yangon-N,Taikkyi,43,29022,0.001481635
+Ayeyarwady,Hinthada,Henzada,203,76335,0.002659331
+Ayeyarwady,Hinthada,Danubyu,111,56837,0.001952953
+Bago,Thayarwady,Minhla,5187,1072069,0.004838308
+Ayeyarwady,Hinthada,Zalun,79,40527,0.001949318
+Bago,Thayarwady,Monyo,70,17778,0.003937451
+Bago,Thayarwady,Tharrawaddy,71,19361,0.003667166
+Yangon,Yangon-N,Hmawbi,2171,738893,0.002938179
+Yangon,Yangon-N,Hlegu,7796,867395,0.008987831
+Bago,Thayarwady,Letpatan,1298,609211,0.002130625
+Bago,Pegu,Bago (Pegu),55213,2458344,0.022459428
+Bago,Pegu,Kyauktaga,14730,2811773,0.005238687
+Bago,Pegu,Daik-U,3416,467487,0.007307155
+Bago,Pegu,Kawa,3,15215,0.000197174
+Yangon,Yangon-S,Kayan,2,4798,0.00041684
+Yangon,Yangon-S,Syriam,15,2559,0.005861665
+Yangon,Yangon-E,Yangon (Rangoon),109,2381,0.045779084
+Yangon,Yangon-W,Yangon (Rangoon),59,5167,0.011418618
+Yangon,Yangon-N,Htantabin,12,3599,0.00333426
+Yangon,Yangon-S,Insein,16,11756,0.001361007
+Yangon,Yangon-S,Kawkhmu,928,185181,0.005011313
+Ayeyarwady,Pharpon,Dedaye,56,13432,0.004169148
+Yangon,Yangon-S,Kungyangon,194,64359,0.003014341
+Yangon,Yangon-S,Kyauktan,37,3667,0.010089992
+Yangon,Yangon-S,Thongwa,5,2050,0.002439024
+Bago,Pegu,Thanatpin,12,9451,0.001269707
+Mon,Thaton,Bilin,28399,1877036,0.015129704
+Mon,Thaton,Paung,6578,240921,0.027303556
+Mon,Mawlamyine,Chaungzon,1081,57547,0.018784646
+Mon,Mawlamyine,Moulmein,194,15320,0.012663185
+Mon,Mawlamyine,Mudon,4026,257485,0.015635862
+Mon,Mawlamyine,Kyaikmaraw,20979,556959,0.037667046
+Kayin,Kawkareik,Pa-An,31511,1419591,0.022197239
+Mon,Thaton,Thaton,10999,631416,0.017419578
+Kayin,Kawkareik,Hlaingbwe,57939,4235041,0.013680859
+Mon,Thaton,Kyaikto,23165,871958,0.026566647
+Bago,Pegu,Shwegyin,38705,2804952,0.01379881
+Kayin,Kawkareik,Papun,143728,8723762,0.016475461
+Bago,Pegu,Nyaungiebin,16,21410,0.000747314
+Bago,Pegu,Waw,89,16993,0.005237451
+Bago,Taungoo,Pyu,59767,1819751,0.032843504
+Bago,Taungoo,Kyaukki,21971,2323858,0.009454536
+Bago,Taungoo,Oktwin,13193,1286045,0.010258583
+Bago,Taungoo,Tantabin,546,143523,0.003804268
+Kayin,Kawkareik,Thandaung,34312,4749629,0.007224143
+Kayah,Bawlake,Pasawng,14855,4227571,0.003513838
+Kayah,Bawlake,Bawlakhe,23815,2291745,0.010391645
+Kayah,Loikaw,Hsataw,15984,2785146,0.005739017
+Kayah,Loikaw,Loi-Kaw,11298,753318,0.01499765
+Kayah,Loikaw,Dimawhso,4342,628872,0.006904426
+Kayah,Loikaw,Phruhso,54901,1775508,0.030921291
+Shan,Taunggye,Pekhon,42480,1490498,0.028500541
+Bago,Taungoo,Thoungoo,24548,1777331,0.013811721
+Bago,Taungoo,Yedashe,32918,2479131,0.01327804
+Mandalay,Yamethin,Pyinmana,17402,1787922,0.009733087
+Mandalay,Yamethin,Lewe,5451,1354456,0.004024494
+Magway,Thayetmyo,Myayde (Aunglan),12462,732273,0.017018243
+Bago,Pyay,Paukkaung,16726,992210,0.016857319
+Bago,Pyay,Thegon,2568,207321,0.012386589
+Bago,Thayarwady,Nattalin,7528,810129,0.009292347
+Bago,Thayarwady,Okpo,2547,695350,0.003662904
+Bago,Thayarwady,Gyobingauk,3226,413210,0.007807168
+Bago,Pyay,Paungde,0,4309,0
+Bago,Pyay,Prome,132,16598,0.007952765
+Bago,Thayarwady,Zigon,4,10018,0.000399281
+Magway,Magwe Minbu,Taungdwingyi,632,311124,0.002031344
+Magway,Magwe Minbu,Myothit,59,154590,0.000381655
+Naypyitaw,Naypyitaw,Pyinmana,202,2581,0.078264239
+Mandalay,Yamethin,Tatkon,2686,1412850,0.001901122
+Shan,Taunggye,Pinlaung,63065,2745409,0.022971076
+Mandalay,Yamethin,Yamethin,4760,938041,0.005074405
+Magway,Magwe Minbu,Natmauk,1,2017,0.000495786
+Mandalay,Meiktila,Pyawbwe,973,530877,0.001832816
+Mandalay,Meiktila,Thazi,4815,774816,0.006214379
+Shan,Taunggye,Ye-Ngan,5321,3292535,0.00161608
+Mandalay,Meiktila,Wudwin,78,68050,0.001146216
+Mandalay,Meiktila,Meiktila,14,268,0.052238806
+Mandalay,Myingyan,Mahlaing,7,2501,0.00279888
+Mandalay,Myingyan,Taungtha,6,1322,0.004538578
+Mandalay,Myingyan,Myingyan,5,766,0.006527415
+Mandalay,Myingyan,Natogyi,7,1521,0.004602235
+Sagaing,Sagaing,Ngazun,14,727,0.019257221
+Sagaing,Sagaing,Myaung,1,257,0.003891051
+Sagaing,Monywa,Chaung-U,3,1076,0.002788104
+Sagaing,Sagaing,Myinmu,0,79,0
+Sagaing,Monywa,Ayadaw,159,384,0.4140625
+Sagaing,Shwebo,Tabayin,232,18864,0.012298558
+Sagaing,Shwebo,Wetlet,52,1306,0.039816233
+Sagaing,Shwebo,Shwebo,51,2448,0.020833333
+Sagaing,Sagaing,Sagaing,18,2838,0.006342495
+Mandalay,Kyaukse,Tada-U,147,1418,0.103667137
+Mandalay,Kyaukse,Singaing,141,35339,0.003989926
+Mandalay,Mandalay,Amarapura,19,1298,0.014637904
+Mandalay,Mandalay,Mandalay,26,759,0.034255599
+Mandalay,Pyin-Oo-Lwin,Madaya,799,517533,0.001543863
+Mandalay,Pyin-Oo-Lwin,Singu,2808,1059228,0.002650987
+Mandalay,Mandalay,Patheingyi,3669,469015,0.007822778
+Shan,Kyaukme,Nawnghkio,20122,2475471,0.008128554
+Mandalay,Mandalay,Maymyo,8330,919092,0.009063293
+Mandalay,Kyaukse,Kyaukse,2386,1366996,0.001745433
+Mandalay,Kyaukse,Myitha,319,115120,0.002771022
+Shan,Taunggye,Lawksawk,38518,4144348,0.009294104
+Shan,Taunggye,Pindaya,364,71922,0.005061038
+Shan,Taunggye,Kalaw,2078,585632,0.003548303
+Shan,Taunggye,Taunggyi,2127,406002,0.00523889
+Shan,Loilen,Mong Kung,62912,6101647,0.010310659
+Shan,Kyaukme,Kyaukme,53026,4615178,0.011489481
+Shan,Kyaukme,Hsipaw,74078,4373379,0.01693839
+Shan,Loilen,Lai-Hka,27995,2042627,0.01370539
+Shan,Loilen,Loi Lem,11922,897848,0.013278417
+Shan,Loilen,Namsang,41898,2705811,0.015484452
+Shan,Taunggye,Ho-Pong,3163,634928,0.004981667
+Shan,Loilen,Mong Nai,26629,4093616,0.006505007
+Shan,Loilen,Mawkmai,11462,2628229,0.004361112
+Shan,Loilen,Langkho,7288,2378539,0.003064066
+Shan,Taunggye,Hsi Hseng,4124,710602,0.00580353
+Shan,Taunggye,Yawunghwe,1618,568544,0.002845866
+Shan,Loilen,Mong Pan,16979,6854533,0.002477047
+Shan,Mongsat,Mong Tung,28813,6347206,0.004539478
+Shan,Mongsat,Mong Hsat,51188,6353579,0.008056562
+Shan,Mongsat,Mong Ping,58398,8145835,0.007169062
+Shan,Loilen,Ke-Hsi,44837,2571263,0.017437734
+Shan,Loilen,Kunhing,43737,3172299,0.013787162
+Shan,Loilen,Mong Hsu,37621,1996640,0.018842155
+Shan,Lasho,Mong Yai,50982,2277063,0.022389367
+Shan,Lasho,Tangyan,76536,4429685,0.017277978
+Shan,Lasho,Pang-Yang,146204,5663100,0.025816955
+Shan,Lasho,Man Hpang,73638,1782909,0.041302164
+Shan,Lasho,Nampan,74447,1788168,0.041633113
+Shan,Kengtung,Mong Yang,34886,2588352,0.013478074
+Shan,Kengtung,Mongkhak,32724,2929887,0.011169031
+Shan,Kengtung,Keng Tung,64428,5831836,0.011047636
+Shan,Mongphat,Mong Hpayak,10119,2657113,0.003808269
+Shan,Tarchilaik,Tachilek,35043,3984122,0.008795664
+Shan,Mongphat,Mong Yawng,100473,5853840,0.017163605
+Kayin,Myawady,Myawadi,43335,3497212,0.012391299
+Kayin,Hpa-an,Kawkareik,18085,1317362,0.013728193
+Kayin,Hpa-an,Kya-In Seikkyi,173138,9289338,0.018638357
+Tanintharyi,Dawei,Tavoy,49091,8466131,0.005798516
+Tanintharyi,Mergui,Tenasserim,165026,14972035,0.011022283
+Tanintharyi,Dawei,Thayetchaung,26213,2491164,0.01052239
+Tanintharyi,Mergui,Palaw,28624,2491285,0.011489653
+Tanintharyi,Dawei,Launglon,4166,690083,0.006036955
+Tanintharyi,Dawei,Yebyu,60346,4667205,0.012929794
+Mon,Mawlamyine,Ye,32502,2863754,0.011349439
+Mon,Mawlamyine,Thanbyuzayat,13257,743340,0.017834369
+Ayeyarwady,Pharpon,Pyapon,429,19392,0.022122525
+Ayeyarwady,Pharpon,Bogale,293,239126,0.001225295
+Tanintharyi,Mergui,Mergui,62668,5595532,0.01119965
+Tanintharyi,Kawthoung,Bokpyin,131216,7611073,0.017240145
+Kachin,Putao,Nogmung,4920,7756426,0.000634313
+Kachin,Putao,Khawbude,9328,7109674,0.001312015
+Kachin,Putao,Machanbaw,2311,3996522,0.000578253
+Kachin,Myitkyina,Hsawlaw,10277,4348848,0.002363155
+Kachin,Myitkyina,Chipwi,25441,4093071,0.006215626
+Kachin,Putao,Sumpranbum,21184,9405444,0.002252313
+Kachin,Myitkyina,Njangyang,30925,6553019,0.004719199
+Kachin,Myitkyina,Waingmaw,73282,5889827,0.012442131
+Shan,Lasho,Pangwaum,43283,1237355,0.03498026
+Shan,Lasho,Mong Mao,66139,2145238,0.030830612
+Shan,Kunlong,Kunlong,4175,526927,0.007923299
+Shan,Lauking,Kong-Kyan,5765,862135,0.006686888
+Shan,Muse,Kutkai,36775,4135283,0.008892983
+Shan,Kunlong,Ho-Pang,31386,1408480,0.022283597
+Shan,Lasho,Hsenwi,53220,2017367,0.026380921
+Shan,Lasho,Lashio,77444,4333525,0.017870902
+Shan,Muse,Mu-Se,22580,1932545,0.011684075
+Shan,Muse,Namhkan,43459,1990221,0.021836268
+Kachin,Myitkyina,Myitkyina,62171,7837796,0.007932204
+Kachin,Bhamo,Momauk,17313,3029632,0.005714555
+Kachin,Myitkyina,Mogaung,7411,2400590,0.003087158
+Kachin,Myitkyina,Kamaing,21383,8254148,0.002590576
+Kachin,Myitkyina,Mohnyin,18118,7991544,0.002267146
+Kachin,Bhamo,Shwegu,12104,3620744,0.003342959
+Kachin,Bhamo,Bhamo,24858,2625746,0.009467024
+Sagaing,Katha,Katha,21821,2009361,0.010859671
+Shan,Kyaukme,Mabein,14692,5886379,0.002495932
+Kachin,Bhamo,Mansi,22226,3763269,0.005906035
+Shan,Kyaukme,Mong Mit,16965,3552712,0.004775225
+Shan,Kyaukme,Namtu,122944,5250164,0.023417173
+Shan,Kyaukme,Namhsan,10913,1216058,0.008974079
+Mandalay,Pyin-Oo-Lwin,Mogok,6370,1428007,0.004460762
+Sagaing,Katha,Tigyaing,10576,1927501,0.005486897
+Sagaing,Katha,Indaw,3483,1581718,0.002202036
+Sagaing,Katha,Kawlin,9295,1333939,0.006968085
+Sagaing,Katha,Wuntho,5388,951653,0.005661728
+Mandalay,Pyin-Oo-Lwin,Thabeikkyin,15741,2255202,0.006979863
+Sagaing,Shwebo,Kanbalu,13573,1267477,0.010708676
+Sagaing,Shwebo,Tantabin,209,38373,0.005446538
+Sagaing,Shwebo,Khin-U,22,15988,0.001376032
+Sagaing,Shwebo,Kyunhla,3277,2033078,0.001611842
+Sagaing,Shwebo,Taze,2601,601324,0.004325455
+Sagaing,Shwebo,Ye-U,7036,469719,0.014979168
+Sagaing,Katha,Pinlebu,9288,3995772,0.002324457
+Sagaing,Mawleik,Phaungbyin,11165,4061903,0.002748712
+Sagaing,Katha,Banmauk,11516,4469873,0.00257636
+Sagaing,Hkamti,Homalin,85322,13876705,0.006148578
+Sagaing,Hkamti,Khamti,41348,11956278,0.003458267
+Sagaing,Hkamti,Lashe,13921,3399951,0.004094471
+Sagaing,Hkamti,Lahe,138461,5607799,0.024690792
+Sagaing,Hkamti,Nanyun,59062,9464441,0.006240411
+Kachin,Myitkyina,Tanai,39574,17326417,0.002284027
+Kachin,Putao,Putao,6197,6765107,0.000916024
+Sagaing,Tamu,Tamu,12546,1883723,0.006660215
+Sagaing,Mawleik,Mawlaik,6265,5103451,0.001227601
+Sagaing,Kalemyo,Kalewa,4621,2672961,0.001728794
+Chin,Palam,Falam,18073,2151216,0.008401295
+Chin,Palam,Tiddim,46213,3233127,0.014293593
+Chin,Palam,Tonzang,29376,4638234,0.006333445

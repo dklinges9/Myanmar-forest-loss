@@ -15,11 +15,11 @@ library(zoo)
 library(tidyverse)
 library(drLumi)
 
-allyears_pertown <- read.csv("./data/outputs/Myanmar_TownshipForestLossFragmentation.csv")
+allyears_pertown <- read_csv("./data/outputs/Myanmar_TownshipForestLossFragmentation.csv")
 
 # Select down to just total area of patches lost
 allyears_pertown <- allyears_pertown %>%
-  select(-X) %>%
+  select(-X1) %>%
   rename(township = Township) %>%
   rename(year = Year) %>%
   rename(number_patches = `Number.of.Loss.Patches`) %>%
@@ -28,6 +28,8 @@ allyears_pertown <- allyears_pertown %>%
 
 # Remove NAs
 allyears_pertown <- na.omit(allyears_pertown)
+
+forest_loss <- read_csv("./data/intermediate/township_level/forest_loss/forest_loss.csv")
 
 ## * Per town loss across all years  ###########
 
@@ -64,8 +66,15 @@ sumyears_pertown_10p <- sumyears_pertown %>%
   
 ## * Top 10th percentile loss across all years #############
 
+forest_loss_10p <- forest_loss %>%
+  select(-region, -district) %>%
+  group_by(township) %>%
+  summarize_all(sum) %>%
+  arrange(desc(percentloss)) %>%
+  slice(1:29)
+  
 allyears_pertown_10p <- allyears_pertown %>%
-  filter(township %in% sumyears_pertown_10p$township)
+  filter(township %in% forest_loss_10p$township)
 
 
 # Summarized across the country
@@ -81,7 +90,7 @@ y <- country_loss_avg_10p$patch_loss_area
 # Plot to check out the time series
 plot(x, y, pch=19)
 
-# Git non-linear model
+# Get non-linear model
 exp_model <- nls(y ~ exp(a + b * (x-2000)), start = list(a = 0, b = 1))
 
 # Check correlation
@@ -235,14 +244,24 @@ lines(x, predict(fit2, list(x = x)))
 ## *** Pre intervention, top 10th percentile of loss ##########
 
 pertown_pre_10p <- pertown_pre %>%
-  filter(patch_loss_area >= 40771683.7) # loss of 29th highest township
-
+  filter(township %in% forest_loss_10p$township)
 
 # ggplot it
-plot <- ggplot(pertown_pre, aes(year-2000, patch_loss_area)) +
+plot <- ggplot(pertown_pre_10p, aes(year, patch_loss_area)) +
   geom_jitter()
-
 plot
+
+# Average across townships
+pertown_pre_10p_avgs <- pertown_pre_10p %>%
+  select(-township) %>%
+  group_by(year) %>%
+  summarize_all(mean)
+
+# ggplot it
+plot <- ggplot(pertown_pre_10p_avgs, aes(year, patch_loss_area)) +
+  geom_point()
+plot
+
 ## ++ Post intervention, per-town loss ############
 pertown_post <- allyears_pertown %>%
   filter(year >= 2011)
@@ -276,6 +295,39 @@ plot(x, sqrooty, pch=19)
 fit2  <- lm(sqrooty~x)
 cor(sqrooty,predict(fit2))
 lines(x, predict(fit2, list(x = x)))
+
+## *** Post intervention, top 10th percentile of loss ##########
+
+pertown_post_10p <- pertown_post %>%
+  filter(township %in% forest_loss_10p$township)
+
+# ggplot it
+plot <- ggplot(pertown_post_10p, aes(year, patch_loss_area)) +
+  geom_jitter()
+plot
+
+# Average across townships
+pertown_post_10p_avgs <- pertown_post_10p %>%
+  select(-township) %>%
+  group_by(year) %>%
+  summarize_all(mean)
+
+# ggplot it
+plot <- ggplot(pertown_post_10p_avgs, aes(year, patch_loss_area)) +
+  geom_point()
+plot
+
+x <- pertown_post_10p_avgs$year
+y <- pertown_post_10p_avgs$patch_loss_area
+
+a_start <- 100000000
+b_start <- log(2)
+log_model <- nls(y ~ x-2000, start = list(a = a_start, b = b_start))
+# Check correlation
+cor(y,predict(log_model))
+
+# 0.9557971....pretty good. Let's add the fitted curve to the plot
+lines(x, predict(log_model, list(x = x)))
 
 ## * Messing around with per-town time series #############
 timeSeries_pre <- as.ts(pertown_pre$patch_loss_area, start = 2001, end = 2010,
